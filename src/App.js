@@ -3,10 +3,10 @@ import "./App.css";
 import Posts from "./components/posts";
 import PostLoadingComponent from "./components/postLoading";
 import axiosInstance from "./axios";
-import useLogin from "./stores/loginStore";
-import Button from "@material-ui/core/Button";
+// import useLogin from "./stores/loginStore";
+// import Button from "@material-ui/core/Button";
 import "./App.css";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 
 function App() {
   const PostLoading = PostLoadingComponent(Posts);
@@ -15,7 +15,7 @@ function App() {
     posts: null,
   });
 
-  const loggedIn = useLogin((state) => state.loggedIn);
+  // const loggedIn = useLogin((state) => state.loggedIn);
 
   useEffect(() => {
     axiosInstance
