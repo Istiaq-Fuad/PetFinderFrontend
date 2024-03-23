@@ -75,10 +75,10 @@ function SinglePost() {
       <Box
         component="img"
         sx={{
-          height: 333,
+          height: 300,
           width: 350,
-          maxHeight: { xs: 233, md: 167 },
-          maxWidth: { xs: 350, md: 250 },
+          maxHeight: { xs: 300, md: 250 },
+          maxWidth: { xs: 400, md: 300 },
         }}
         alt="pet for adoption"
         src={pet.image}
