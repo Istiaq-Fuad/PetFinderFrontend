@@ -5,6 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import { Button, Box } from "@material-ui/core";
 import useLogin from "../stores/loginStore";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Alert from "@mui/material/Alert";
 
 function SinglePost() {
   const { petId } = useParams();
@@ -20,18 +22,32 @@ function SinglePost() {
     // console.log(userId);
   }
 
+  const initialFormData = Object.freeze({
+    pet_experience: "",
+    house_condition: "",
+  });
+  const [formData, updateFormData] = useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axiosInstance
       .post(`applications/`, {
         pet: petId,
-        // user: userId,
-        // password: formData.password,
+        pet_experience: formData.pet_experience,
+        house_condition: formData.house_condition,
       })
       .then((res) => {
         setButtonText("request submitted");
         setButtonDisable(true);
+        // console.log(formData);
       })
       .catch((e) => console.error(e.message));
   };
@@ -102,17 +118,57 @@ function SinglePost() {
         <h4>size: {pet.size}</h4>
         <h4>color: {pet.color}</h4>
         <p>description: {pet.description}</p>
-
-        {loginState && (
-          <Button
-            disabled={buttonDisable}
+        {loginState && !buttonDisable && (
+          <form noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="pet_experience"
+              label="Do you have any experience with pets?"
+              name="pet_experience"
+              // autoComplete="email"
+              // autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="house_condition"
+              label="Which steps did you take to make your house suitable for pets?"
+              type="house_condition"
+              id="house_condition"
+              autoComplete="house_condition"
+              onChange={handleChange}
+            />
+            {/* <Button
             type="submit"
+            fullWidth
             variant="contained"
             color="primary"
             onClick={handleSubmit}
           >
-            {buttonText}
-          </Button>
+            Sign In
+          </Button> */}
+            <Button
+              // disabled={buttonDisable}
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+              style={{ marginTop: "8px" }}
+            >
+              {buttonText}
+            </Button>
+          </form>
+        )}
+        {loginState && buttonDisable && (
+          <Alert variant="filled" severity="success">
+            you have already requested to adopt this pet
+          </Alert>
         )}
       </Box>
     </Box>
