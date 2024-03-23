@@ -18,11 +18,14 @@ function App() {
   const loggedIn = useLogin((state) => state.loggedIn);
 
   useEffect(() => {
-    axiosInstance.get("pets/").then((res) => {
-      const allPosts = res.data;
-      setAppState({ loading: false, posts: allPosts });
-      // console.log(res.data);
-    });
+    axiosInstance
+      .get("pets/")
+      .then((res) => {
+        const allPosts = res.data;
+        setAppState({ loading: false, posts: allPosts });
+        // console.log(res.data);
+      })
+      .catch((e) => console.log(e));
   }, []);
 
   return (
