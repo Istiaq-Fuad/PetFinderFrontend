@@ -1,4 +1,4 @@
-Backend for this website can be found [here]([https://github.com/facebook/create-react-app](https://github.com/Istiaq-Fuad/PetFinderApi)).
+Backend for this website can be found [here](https://github.com/Istiaq-Fuad/PetFinderApi).
 
 ## Available Scripts
 
